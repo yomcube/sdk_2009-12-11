@@ -10,7 +10,8 @@
 #if 0
 #include <revolution/gx/GXEnum.h>
 #else
-#include <context_rvl.h>
+#include <revolution/gx.h>
+//#include <context_rvl.h>
 #endif
 
 /*******************************************************************************

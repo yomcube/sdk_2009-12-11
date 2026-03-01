@@ -13,6 +13,7 @@
 // #include <revolution/mem/allocator.h>
 #include <revolution/wpad.h>
 
+#include <revolution/gx.h>
 #include <context_rvl.h>
 
 /*******************************************************************************

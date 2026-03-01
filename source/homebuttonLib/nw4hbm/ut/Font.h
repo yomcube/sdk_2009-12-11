@@ -10,6 +10,7 @@
 #include "CharStrmReader.h"
 
 // #include <revolution/gx/GXEnum.h>
+#include <revolution/gx.h>
 
 #include <context_rvl.h>
 

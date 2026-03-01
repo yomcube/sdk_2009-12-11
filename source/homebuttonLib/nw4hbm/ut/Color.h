@@ -10,6 +10,7 @@
 #include <revolution/types.h>
 
 // #include <revolution/gx/GXStruct.h>
+#include <revolution/gx.h>
 
 #include <context_rvl.h>
 

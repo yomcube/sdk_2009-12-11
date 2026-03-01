@@ -10,7 +10,7 @@
 #if 0
 #include <revolution/mtx/vec.h>
 #else
-#include <context_rvl.h>
+#include <revolution/mtx.h>
 #endif
 
 #include <revolution/wpad.h>
