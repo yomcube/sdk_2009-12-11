@@ -106,7 +106,7 @@ void PSMTXReflect(Mtx m, const Vec* p, const Vec* n);
 #define MTXInvXpose   C_MTXInvXpose
 #define MTXRotRad     C_MTXRotRad
 #define MTXRotTrig    C_MTXRotTrig
-#define MTXRotAxisRad C_MTXRotRad
+#define MTXRotAxisRad C_MTXRotAxisRad
 #define MTXTrans      C_MTXTrans
 #define MTXTransApply C_MTXTransApply
 #define MTXScale      C_MTXScale
@@ -123,7 +123,7 @@ void PSMTXReflect(Mtx m, const Vec* p, const Vec* n);
 #define MTXInvXpose   PSMTXInvXpose
 #define MTXRotRad     PSMTXRotRad
 #define MTXRotTrig    PSMTXRotTrig
-#define MTXRotAxisRad PSMTXRotRad
+#define MTXRotAxisRad PSMTXRotAxisRad
 #define MTXTrans      PSMTXTrans
 #define MTXTransApply PSMTXTransApply
 #define MTXScale      PSMTXScale
@@ -198,6 +198,31 @@ void C_VECReflect(CVecPtr src, CVecPtr normal, VecPtr dst);
 
 #define VECHalfAngle C_VECHalfAngle
 #define VECReflect   C_VECReflect
+
+// MTXVEC
+// C versions
+void C_MTXMultVec(const Mtx m, const Vec* src, Vec* dst);
+void C_MTXMultVecArray(const Mtx m, const Vec* srcBase, Vec* dstBase, u32 count);
+void C_MTXMultVecSR(const Mtx m, const Vec* src, Vec* dst);
+void C_MTXMultVecArraySR(const Mtx m, const Vec* srcBase, Vec* dstBase, u32 count);
+
+// PS versions
+void PSMTXMultVec(const Mtx m, const Vec* src, Vec* dst);
+void PSMTXMultVecArray(const Mtx m, const Vec* srcBase, Vec* dstBase, u32 count);
+void PSMTXMultVecSR(const Mtx m, const Vec* src, Vec* dst);
+void PSMTXMultVecArraySR(const Mtx m, const Vec* srcBase, Vec* dstBase, u32 count);
+
+#ifdef DEBUG
+#define MTXMultVec        C_MTXMultVec
+#define MTXMultVecArray   C_MTXMultVecArray
+#define MTXMultVecSR      C_MTXMultVecSR
+#define MTXMultVecArraySR C_MTXMultVecArraySR
+#else
+#define MTXMultVec        PSMTXMultVec
+#define MTXMultVecArray   PSMTXMultVecArray
+#define MTXMultVecSR      PSMTXMultVecSR
+#define MTXMultVecArraySR PSMTXMultVecArraySR
+#endif
 
 #ifdef __cplusplus
     }

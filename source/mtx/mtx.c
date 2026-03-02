@@ -1,4 +1,3 @@
-#include "macros.h"
 #include <revolution/mtx.h>
 #include <math.h>
 #include <context_rvl.h>
@@ -698,7 +697,7 @@ void PSMTXRotTrig(register Mtx m, register char axis, register f32 sinA, registe
 	}
 }
 
-void C_MTXRotAxisRad(Mtx m, const Vec* axis, f32 rad) {
+void C_MTXRotAxisRad(Mtx m, CVecPtr axis, f32 rad) {
     Vec vN;
     f32 s;
     f32 c;
@@ -737,7 +736,7 @@ void C_MTXRotAxisRad(Mtx m, const Vec* axis, f32 rad) {
     m[2][3] = 0;
 }
 
-void __PSMTXRotAxisRadInternal(register Mtx m, const register Vec* axis, register f32 sT, register f32 cT) {
+void __PSMTXRotAxisRadInternal(register Mtx m, register CVecPtr axis, register f32 sT, register f32 cT) {
     register f32 tT, fc0;
     register f32 tmp0, tmp1, tmp2, tmp3, tmp4;
     register f32 tmp5, tmp6, tmp7, tmp8, tmp9;
