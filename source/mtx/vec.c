@@ -164,9 +164,6 @@ f32 PSVECMag(register CVecPtr v) {
         ps_mul vxy, vxy, vxy
         lfs vzz, 0x8(v)
         ps_madd sqmag, vzz, vzz, vxy
-    }
-
-    asm {
         ps_sum0 sqmag, sqmag, vxy, vxy
         fcmpu cr0, sqmag, nwork0
         beqlr

@@ -686,7 +686,7 @@ config.libs = [
             Object(DebugNonMatching, ReleaseNonMatching, "mtx/mtx44vec.c"),
             Object(DebugNonMatching, ReleaseNonMatching, "mtx/vec.c"),
             Object(DebugNonMatching, ReleaseNonMatching, "mtx/quat.c"),
-            Object(DebugNonMatching, ReleaseNonMatching, "mtx/psmtx.c"),
+            Object(DebugMatching   , ReleaseMatching   , "mtx/psmtx.c"),
         ],
     ),
     RvlLib(
