@@ -11,6 +11,10 @@ extern double (cos)(double x);
 extern double (sin)(double x);
 extern double (tan)(double x);
 
+extern float (cosf)(float x);
+extern float (sinf)(float x);
+extern float (tanf)(float x);
+
 extern double (pow)(double x, double y);
 extern float (powf)(float x, float y);
 
