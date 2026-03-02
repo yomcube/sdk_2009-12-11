@@ -96,24 +96,7 @@ void PSMTXScaleApply(const Mtx src, Mtx dst, f32 xS, f32 yS, f32 zS);
 void PSMTXQuat(Mtx m, const Quaternion* q);
 void PSMTXReflect(Mtx m, const Vec* p, const Vec* n);
 
-#ifdef DEBUG
-#define MTXIdentity   C_MTXIdentity
-#define MTXCopy       C_MTXCopy
-#define MTXConcat     C_MTXConcat
-#define MTXInverse    C_MTXInverse
-#define MTXTranspose  C_MTXTranspose
-#define MTXInverse    C_MTXInverse
-#define MTXInvXpose   C_MTXInvXpose
-#define MTXRotRad     C_MTXRotRad
-#define MTXRotTrig    C_MTXRotTrig
-#define MTXRotAxisRad C_MTXRotAxisRad
-#define MTXTrans      C_MTXTrans
-#define MTXTransApply C_MTXTransApply
-#define MTXScale      C_MTXScale
-#define MTXScaleApply C_MTXScaleApply
-#define MTXQuat       C_MTXQuat
-#define MTXReflect    C_MTXReflect
-#else
+#ifdef NDEBUG
 #define MTXIdentity   PSMTXIdentity
 #define MTXCopy       PSMTXCopy
 #define MTXConcat     PSMTXConcat
@@ -130,6 +113,23 @@ void PSMTXReflect(Mtx m, const Vec* p, const Vec* n);
 #define MTXScaleApply PSMTXScaleApply
 #define MTXQuat       PSMTXQuat
 #define MTXReflect    PSMTXReflect
+#else
+#define MTXIdentity   C_MTXIdentity
+#define MTXCopy       C_MTXCopy
+#define MTXConcat     C_MTXConcat
+#define MTXInverse    C_MTXInverse
+#define MTXTranspose  C_MTXTranspose
+#define MTXInverse    C_MTXInverse
+#define MTXInvXpose   C_MTXInvXpose
+#define MTXRotRad     C_MTXRotRad
+#define MTXRotTrig    C_MTXRotTrig
+#define MTXRotAxisRad C_MTXRotAxisRad
+#define MTXTrans      C_MTXTrans
+#define MTXTransApply C_MTXTransApply
+#define MTXScale      C_MTXScale
+#define MTXScaleApply C_MTXScaleApply
+#define MTXQuat       C_MTXQuat
+#define MTXReflect    C_MTXReflect
 #endif
 
 // C versions only
@@ -212,16 +212,16 @@ void PSMTXMultVecArray(const Mtx m, const Vec* srcBase, Vec* dstBase, u32 count)
 void PSMTXMultVecSR(const Mtx m, const Vec* src, Vec* dst);
 void PSMTXMultVecArraySR(const Mtx m, const Vec* srcBase, Vec* dstBase, u32 count);
 
-#ifdef DEBUG
-#define MTXMultVec        C_MTXMultVec
-#define MTXMultVecArray   C_MTXMultVecArray
-#define MTXMultVecSR      C_MTXMultVecSR
-#define MTXMultVecArraySR C_MTXMultVecArraySR
-#else
+#ifdef NDEBUG
 #define MTXMultVec        PSMTXMultVec
 #define MTXMultVecArray   PSMTXMultVecArray
 #define MTXMultVecSR      PSMTXMultVecSR
 #define MTXMultVecArraySR PSMTXMultVecArraySR
+#else
+#define MTXMultVec        C_MTXMultVec
+#define MTXMultVecArray   C_MTXMultVecArray
+#define MTXMultVecSR      C_MTXMultVecSR
+#define MTXMultVecArraySR C_MTXMultVecArraySR
 #endif
 
 #ifdef __cplusplus
