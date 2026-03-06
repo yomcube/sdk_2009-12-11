@@ -10,10 +10,14 @@ extern double (atan)(double x);
 extern double (cos)(double x);
 extern double (sin)(double x);
 extern double (tan)(double x);
+extern double (acos)(double x);
+extern double (atan2)(double x, double y);
 
 extern float (cosf)(float x);
 extern float (sinf)(float x);
 extern float (tanf)(float x);
+extern float (acosf)(float x);
+extern float (atan2f)(float x, float y);
 
 extern double (pow)(double x, double y);
 extern float (powf)(float x, float y);
