@@ -31,6 +31,12 @@ typedef f32 const (*CMtxPtr)[4];
 typedef f32 const (*CMtx43Ptr)[3];
 typedef f32 const (*CMtx44Ptr)[4];
 
+typedef struct {
+    u32 numMtx;
+    MtxPtr stackBase;
+    MtxPtr stackPtr;
+} MTXStack;
+
 // Vectors
 
 // [SPQE7T]/ISpyD.elf:.debug_info::0xd64ea

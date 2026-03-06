@@ -2,18 +2,6 @@
 #include <math.h>
 #include <context_rvl.h>
 
-
-// This probably should go in math.h
-#if NDEBUG
-#define MTX_SIN sin
-#define MTX_COS cos
-#define MTX_TAN tan
-#else
-#define MTX_SIN sinf
-#define MTX_COS cosf
-#define MTX_TAN tanf
-#endif
-
 void C_MTXMultVec(const Mtx m, const Vec* src, Vec* dst) {
     Vec vTmp;
 
