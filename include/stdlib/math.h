@@ -28,6 +28,12 @@ extern float (sqrtf)(float x);
 /* Technically NDEBUG is only supposed to control the definition of the assert()
  * macro in <assert.h>, but it also kinda makes sense to use it like this, so
  */
+#if NDEBUG
+#define sinf sin
+#define cosf cos
+#define tanf tan
+#endif
+
 #if defined(NDEBUG)
 inline float (sqrtf)(float x) { return (float)(sqrt)(x); }
 inline float (powf)(float x, float y) { return (float)(pow)(x, y); }
