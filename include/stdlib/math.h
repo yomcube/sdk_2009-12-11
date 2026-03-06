@@ -25,6 +25,9 @@ extern float (powf)(float x, float y);
 extern double (sqrt)(double x);
 extern float (sqrtf)(float x);
 
+extern double (fabs)(double x);
+extern float (fabsf)(float x);
+
 /* Technically NDEBUG is only supposed to control the definition of the assert()
  * macro in <assert.h>, but it also kinda makes sense to use it like this, so
  */

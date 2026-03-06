@@ -213,6 +213,31 @@ u32 C_MTX44Inverse(const Mtx44 src, Mtx44 inv);
 #define MTXOrtho       C_MTXOrtho
 #define MTX44Inverse   C_MTX44Inverse
 
+// MTX44VEC
+// C versions
+void C_MTX44MultVec(const Mtx44 m, const Vec* src, Vec* dst);
+void C_MTX44MultVecArray(const Mtx44 m, const Vec* srcBase, Vec* dstBase, u32 count);
+void C_MTX44MultVecSR(const Mtx44 m, const Vec* src, Vec* dst);
+void C_MTX44MultVecArraySR(const Mtx44 m, const Vec* srcBase, Vec* dstBase, u32 count);
+
+// PS versions
+void PSMTX44MultVec(const Mtx44 m, const Vec* src, Vec* dst);
+void PSMTX44MultVecArray(const Mtx44 m, const Vec* srcBase, Vec* dstBase, u32 count);
+void PSMTX44MultVecSR(const Mtx44 m, const Vec* src, Vec* dst);
+void PSMTX44MultVecArraySR(const Mtx44 m, const Vec* srcBase, Vec* dstBase, u32 count);
+
+#ifdef DEBUG
+#define MTX44MultVec        C_MTX44MultVec
+#define MTX44MultVecArray   C_MTX44MultVecArray
+#define MTX44MultVecSR      C_MTX44MultVecSR
+#define MTX44MultVecArraySR C_MTX44MultVecArraySR
+#else
+#define MTX44MultVec        PSMTX44MultVec
+#define MTX44MultVecArray   PSMTX44MultVecArray
+#define MTX44MultVecSR      PSMTX44MultVecSR
+#define MTX44MultVecArraySR PSMTX44MultVecArraySR
+#endif
+
 // Vectors
 // C versions
 void C_VECAdd(CVecPtr a, CVecPtr b, VecPtr ab);

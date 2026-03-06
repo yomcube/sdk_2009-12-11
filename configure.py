@@ -683,7 +683,7 @@ config.libs = [
             Object(DebugMatching   , ReleaseMatching   , "mtx/mtxvec.c"),
             Object(DebugNonMatching, ReleaseMatching   , "mtx/mtxstack.c"),
             Object(DebugNonMatching, ReleaseNonMatching, "mtx/mtx44.c"),
-            Object(DebugNonMatching, ReleaseNonMatching, "mtx/mtx44vec.c"),
+            Object(DebugMatching   , ReleaseMatching   , "mtx/mtx44vec.c"),
             Object(DebugNonMatching, ReleaseNonMatching, "mtx/vec.c"),
             Object(DebugNonMatching, ReleaseNonMatching, "mtx/quat.c"),
             Object(DebugMatching   , ReleaseMatching   , "mtx/psmtx.c"),
