@@ -31,13 +31,15 @@ extern float (fabsf)(float x);
 /* Technically NDEBUG is only supposed to control the definition of the assert()
  * macro in <assert.h>, but it also kinda makes sense to use it like this, so
  */
-#if NDEBUG
-#define sinf sin
-#define cosf cos
-#endif
 
 #if defined(NDEBUG)
+inline float (sinf)(float x) { return (float)(sin)(x); }
+inline float (cosf)(float x) { return (float)(cos)(x); }
 inline float (tanf)(float x) { return (float)(tan)(x); }
+
+inline float (acosf)(float x) { return (float)(acos)(x); }
+inline float (atan2f)(float x, float y) { return (float)(atan2)(x, y); }
+
 inline float (sqrtf)(float x) { return (float)(sqrt)(x); }
 inline float (powf)(float x, float y) { return (float)(pow)(x, y); }
 #endif

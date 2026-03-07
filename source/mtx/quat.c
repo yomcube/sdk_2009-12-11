@@ -2,21 +2,6 @@
 #include <math.h>
 #include <context_rvl.h>
 
-// This probably should go in math.h
-#if NDEBUG
-#define MTX_SIN sin
-#define MTX_COS cos
-#define MTX_TAN tan
-#define MTX_ACOS acos
-#define MTX_ATAN2 atan2
-#else
-#define MTX_SIN sinf
-#define MTX_COS cosf
-#define MTX_TAN tanf
-#define MTX_ACOS acosf
-#define MTX_ATAN2 atan2f
-#endif
-
 void C_QUATAdd(const Quaternion* p, const Quaternion* q, Quaternion* r) {
     OSAssertMessage_Line(82, p, "QUATAdd():  NULL QuaternionPtr 'p' ");
     OSAssertMessage_Line(83, q, "QUATAdd():  NULL QuaternionPtr 'q' ");
@@ -305,13 +290,13 @@ void C_QUATExp(const Quaternion* q, Quaternion* r)  {
     scale = 1.0f;
 
     if (theta > 0.00001f) {
-        scale = MTX_SIN(theta) / theta;
+        scale = sinf(theta) / theta;
     }
     
     r->x = scale * q->x;
     r->y = scale * q->y;
     r->z = scale * q->z;
-    r->w = MTX_COS(theta);
+    r->w = cosf(theta);
 }
 
 void C_QUATLogN(const Quaternion* q, Quaternion* r) {
@@ -327,7 +312,7 @@ void C_QUATLogN(const Quaternion* q, Quaternion* r) {
 #endif
 
     scale = sqrtf(scale);
-    theta = MTX_ATAN2(scale, q->w);
+    theta = atan2f(scale, q->w);
 
     if (scale > 0.0f) {
         scale = theta / scale;
@@ -366,8 +351,8 @@ void C_QUATRotAxisRad(Quaternion* r, const Vec* axis, f32 rad) {
     VECNormalize(axis, &nAxis);
 
     half = rad * 0.5f;
-    sh = MTX_SIN(half);
-    ch = MTX_COS(half);
+    sh = sinf(half);
+    ch = cosf(half);
 
     r->x = sh * nAxis.x;
     r->y = sh * nAxis.y;
@@ -451,11 +436,11 @@ void C_QUATSlerp(const Quaternion* p, const Quaternion* q, Quaternion* r, f32 t)
     }
 
     if (cos_th <= 0.99999f) {
-        theta = MTX_ACOS(cos_th);
-        sin_th = MTX_SIN(theta);
+        theta = acosf(cos_th);
+        sin_th = sinf(theta);
 
-        tp = MTX_SIN((1.0f - t) * theta) / sin_th;
-        tq *= MTX_SIN(t * theta) / sin_th;
+        tp = sinf((1.0f - t) * theta) / sin_th;
+        tq *= sinf(t * theta) / sin_th;
     } else {
         tp = 1.0f - t;
         tq *= t;
