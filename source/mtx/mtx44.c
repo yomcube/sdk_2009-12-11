@@ -2,18 +2,6 @@
 #include <math.h>
 #include <context_rvl.h>
 
-
-// This probably should go in math.h
-#if NDEBUG
-#define MTX_SIN sin
-#define MTX_COS cos
-#define MTX_TAN tan
-#else
-#define MTX_SIN sinf
-#define MTX_COS cosf
-#define MTX_TAN tanf
-#endif
-
 static f32 mtxUnit[] = {0.0f, 1.0f, 0.5f, 3.0f};
 
 void C_MTXFrustum(Mtx44 m, f32 t, f32 b, f32 l, f32 r, f32 n, f32 f) {
@@ -54,7 +42,7 @@ void C_MTXPerspective(Mtx44 m, f32 fovY, f32 aspect, f32 n, f32 f) {
     OSAssertMessage_Line(186, 0.0f != aspect, "MTXPerspective():  'aspect' is 0 ");
 
     angle = DEG_TO_RAD(0.5f * fovY);
-    cot = 1 / MTX_TAN(angle);
+    cot = 1 / tanf(angle);
     m[0][0] = (cot / aspect);
     m[0][1] = 0;
     m[0][2] = 0;

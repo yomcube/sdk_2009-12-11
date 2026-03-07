@@ -2,18 +2,6 @@
 #include <math.h>
 #include <context_rvl.h>
 
-
-// This probably should go in math.h
-#if NDEBUG
-#define MTX_SIN sin
-#define MTX_COS cos
-#define MTX_TAN tan
-#else
-#define MTX_SIN sinf
-#define MTX_COS cosf
-#define MTX_TAN tanf
-#endif
-
 #define qr0 0
 
 static f32 Unit01[2] = {
@@ -570,15 +558,15 @@ void C_MTXRotRad(Mtx m, char axis, f32 rad) {
     f32 cosA;
 
     OSAssertMessage_Line(1446, m, "MTXRotRad():  NULL MtxPtr 'm' ");
-    sinA = MTX_SIN(rad);
-    cosA = MTX_COS(rad);
+    sinA = sinf(rad);
+    cosA = cosf(rad);
     C_MTXRotTrig(m, axis, sinA, cosA);
 }
 
 void PSMTXRotRad(Mtx m, char axis, f32 rad) {
     f32 sinA, cosA;
-    sinA = MTX_SIN(rad);
-    cosA = MTX_COS(rad);
+    sinA = sinf(rad);
+    cosA = cosf(rad);
     PSMTXRotTrig(m, axis, sinA, cosA);
 }
 
@@ -714,8 +702,8 @@ void C_MTXRotAxisRad(Mtx m, CVecPtr axis, f32 rad) {
     OSAssertMessage_Line(1676, m, "MTXRotAxisRad():  NULL MtxPtr 'm' ");
     OSAssertMessage_Line(1677, axis, "MTXRotAxisRad():  NULL VecPtr 'axis' ");
 
-    s = MTX_SIN(rad);
-    c = MTX_COS(rad);
+    s = sinf(rad);
+    c = cosf(rad);
     t = 1 - c;
     C_VECNormalize(axis, &vN);
     x = vN.x;
@@ -793,8 +781,8 @@ void __PSMTXRotAxisRadInternal(register Mtx m, register CVecPtr axis, register f
 void PSMTXRotAxisRad(Mtx m, const Vec* axis, f32 rad) {
     f32 sinT, cosT;
 
-    sinT = MTX_SIN(rad);
-    cosT = MTX_COS(rad);
+    sinT = sinf(rad);
+    cosT = cosf(rad);
 
     __PSMTXRotAxisRadInternal(m, axis, sinT, cosT);
 }
