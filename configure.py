@@ -679,14 +679,14 @@ config.libs = [
     RvlLib(
         "mtx",
         [
-            Object(DebugMatching   , ReleaseMatching   , "mtx/mtx.c"),
-            Object(DebugMatching   , ReleaseMatching   , "mtx/mtxvec.c"),
-            Object(DebugNonMatching, ReleaseMatching   , "mtx/mtxstack.c"),
-            Object(DebugMatching   , ReleaseNonMatching, "mtx/mtx44.c"),
-            Object(DebugMatching   , ReleaseMatching   , "mtx/mtx44vec.c"),
-            Object(DebugNonMatching, ReleaseMatching   , "mtx/vec.c"),
-            Object(DebugNonMatching, ReleaseMatching   , "mtx/quat.c"),
-            Object(DebugMatching   , ReleaseMatching   , "mtx/psmtx.c"),
+            Object(DebugMatching   , ReleaseMatching, "mtx/mtx.c"),
+            Object(DebugMatching   , ReleaseMatching, "mtx/mtxvec.c"),
+            Object(DebugNonMatching, ReleaseMatching, "mtx/mtxstack.c"),
+            Object(DebugMatching   , ReleaseMatching, "mtx/mtx44.c"),
+            Object(DebugMatching   , ReleaseMatching, "mtx/mtx44vec.c"),
+            Object(DebugNonMatching, ReleaseMatching, "mtx/vec.c"),
+            Object(DebugNonMatching, ReleaseMatching, "mtx/quat.c"),
+            Object(DebugMatching   , ReleaseMatching, "mtx/psmtx.c"),
         ],
     ),
     RvlLib(

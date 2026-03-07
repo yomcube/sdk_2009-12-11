@@ -376,7 +376,7 @@ u32 C_MTX44Inverse(const Mtx44 src, Mtx44 inv) {
         swp = i;
 
         for (k = i; k < 4; k++) {
-            ftmp = fabsf(gjm[k][i]);
+            ftmp = fabs(gjm[k][i]);
             if (ftmp > max) {
                 max = ftmp;
                 swp = k;
