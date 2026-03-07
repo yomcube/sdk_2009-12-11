@@ -34,10 +34,10 @@ extern float (fabsf)(float x);
 #if NDEBUG
 #define sinf sin
 #define cosf cos
-#define tanf tan
 #endif
 
 #if defined(NDEBUG)
+inline float (tanf)(float x) { return (float)(tan)(x); }
 inline float (sqrtf)(float x) { return (float)(sqrt)(x); }
 inline float (powf)(float x, float y) { return (float)(pow)(x, y); }
 #endif

@@ -679,7 +679,7 @@ config.libs = [
     RvlLib(
         "mtx",
         [
-            Object(DebugNonMatching, ReleaseNonMatching, "mtx/mtx.c"),
+            Object(DebugMatching   , ReleaseMatching   , "mtx/mtx.c"),
             Object(DebugMatching   , ReleaseMatching   , "mtx/mtxvec.c"),
             Object(DebugNonMatching, ReleaseMatching   , "mtx/mtxstack.c"),
             Object(DebugNonMatching, ReleaseNonMatching, "mtx/mtx44.c"),
