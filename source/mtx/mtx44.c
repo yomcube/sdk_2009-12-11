@@ -41,7 +41,8 @@ void C_MTXPerspective(Mtx44 m, f32 fovY, f32 aspect, f32 n, f32 f) {
     OSAssertMessage_Line(185, (fovY > 0.0) && (fovY < 180.0), "MTXPerspective():  'fovY' out of range ");
     OSAssertMessage_Line(186, 0.0f != aspect, "MTXPerspective():  'aspect' is 0 ");
 
-    angle = DEG_TO_RAD(0.5f * fovY);
+    angle = 0.5f * fovY;
+    angle = DEG_TO_RAD(1.0f) * angle;
     cot = 1 / tanf(angle);
     m[0][0] = (cot / aspect);
     m[0][1] = 0;
