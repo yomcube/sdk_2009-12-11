@@ -154,7 +154,7 @@ f32 PSVECMag(register CVecPtr v) {
     register f32 vxy, vzz;
     register f32 sqmag, mag, rmag;
     register f32 nwork0, nwork1;
-    register f32 c_three, c_half;
+    register f32 c_three, c_half, c_zero;
     
 
     c_half = 0.5f;
@@ -165,14 +165,18 @@ f32 PSVECMag(register CVecPtr v) {
         lfs vzz, 0x8(v)
         ps_madd sqmag, vzz, vzz, vxy
         ps_sum0 sqmag, sqmag, vxy, vxy
-        fcmpu cr0, sqmag, nwork0
-        beqlr
-        frsqrte rmag, sqmag
+    }
+
+    c_zero = c_half - c_half;
+
+    if (sqmag == c_zero) {
+        return sqmag;
     }
 
     c_three = 3.0f;
 
     asm {
+        frsqrte rmag, sqmag
         fmuls nwork0, rmag, rmag
         fmuls nwork1, rmag, c_half
         fnmsubs nwork0, nwork0, sqmag, c_three
@@ -334,7 +338,7 @@ f32 PSVECDistance(register CVecPtr a, register CVecPtr b) {
     register f32 v0yz, v1yz, v0xy, v1xy, dyz, dxy;
     register f32 sqdist, rdist, dist;
     register f32 nwork0, nwork1;
-    register f32 c_half, c_three;
+    register f32 c_half, c_three, c_zero;
 
     asm {
         psq_l v0yz, 0x4(a), 0, 0
@@ -346,11 +350,17 @@ f32 PSVECDistance(register CVecPtr a, register CVecPtr b) {
         ps_sub dxy, v0xy, v1xy
     }
 
-    c_half  = 0.5f;
+    c_half = 0.5f;
 
     asm {
         ps_madd sqdist, dxy, dxy, dyz
         ps_sum0 sqdist, sqdist, dyz, dyz
+    }
+
+    c_zero = c_half - c_half;
+
+    if (c_zero == sqdist) {
+        return sqdist;
     }
 
     c_three = 3.0f;
