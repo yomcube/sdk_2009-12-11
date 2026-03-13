@@ -139,20 +139,12 @@ f32 PSVECSquareMag(register CVecPtr v) {
 
 
 f32 C_VECMag(CVecPtr v) {
-    #if NDEBUG
-        return sqrt(
-            v->x * v->x +
-            v->y * v->y +
-            v->z * v->z
-        );
-    #else
-        return sqrtf(C_VECSquareMag(v)); 
-    #endif
+    return sqrtf(C_VECSquareMag(v)); 
 }
 
 f32 PSVECMag(register CVecPtr v) {
     register f32 vxy, vzz;
-    register f32 sqmag, mag, rmag;
+    register f32 sqmag, rmag;
     register f32 nwork0, nwork1;
     register f32 c_three, c_half, c_zero;
     
@@ -163,28 +155,27 @@ f32 PSVECMag(register CVecPtr v) {
         psq_l vxy, 0x0(v), 0, 0
         ps_mul vxy, vxy, vxy
         lfs vzz, 0x8(v)
+        fsubs c_zero, c_half, c_half
         ps_madd sqmag, vzz, vzz, vxy
         ps_sum0 sqmag, sqmag, vxy, vxy
-    }
-
-    c_zero = c_half - c_half;
-
-    if (sqmag == c_zero) {
-        return sqmag;
+        // can't match with an if statement in C; fakematch maybe?
+        fcmpu cr0, sqmag, c_zero
+        beq end
+        frsqrte rmag, sqmag
     }
 
     c_three = 3.0f;
 
     asm {
-        frsqrte rmag, sqmag
         fmuls nwork0, rmag, rmag
         fmuls nwork1, rmag, c_half
         fnmsubs nwork0, nwork0, sqmag, c_three
         fmuls rmag, nwork0, nwork1
-        fmuls mag, sqmag, rmag
+        fmuls sqmag, sqmag, rmag
+      end:
     }
 
-    return mag;
+    return sqmag;
 }
 
 
@@ -322,16 +313,7 @@ f32 PSVECSquareDistance(register CVecPtr a, register CVecPtr b) {
 
 
 f32 C_VECDistance(CVecPtr a, CVecPtr b) {
-    #if NDEBUG
-        Vec delta;
-
-        delta.x = a->x - b->x;
-        delta.y = a->y - b->y;
-        delta.z = a->z - b->z;
-        return sqrt((delta.x*delta.x) + (delta.y*delta.y) + (delta.z*delta.z));
-    #else
-        return sqrtf(C_VECSquareDistance(a, b));
-    #endif
+    return sqrtf(C_VECSquareDistance(a, b));
 }
 
 f32 PSVECDistance(register CVecPtr a, register CVecPtr b) {
@@ -354,13 +336,11 @@ f32 PSVECDistance(register CVecPtr a, register CVecPtr b) {
 
     asm {
         ps_madd sqdist, dxy, dxy, dyz
+        fsubs c_zero, c_half, c_half
         ps_sum0 sqdist, sqdist, dyz, dyz
-    }
-
-    c_zero = c_half - c_half;
-
-    if (c_zero == sqdist) {
-        return sqdist;
+        // Can't get this to match in C for debug, but ASM gets closer. fakematch maybe?
+        fcmpu cr0, f0, f1
+        beq end
     }
 
     c_three = 3.0f;
@@ -372,6 +352,7 @@ f32 PSVECDistance(register CVecPtr a, register CVecPtr b) {
         fnmsubs nwork0, nwork0, sqdist, c_three
         fmuls rdist, nwork0, nwork1
         fmuls dist, sqdist, rdist
+        end:
     }
 
     return dist;

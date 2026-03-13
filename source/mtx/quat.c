@@ -301,14 +301,14 @@ void C_QUATExp(const Quaternion* q, Quaternion* r)  {
 
 void C_QUATLogN(const Quaternion* q, Quaternion* r) {
     f32 theta, scale, mag;
-    OSAssertMessage_Line(676, q, "QUATLogN():  NULL QuaternionPtr 'q' ");
-    OSAssertMessage_Line(677, r, "QUATLogN():  NULL QuaternionPtr 'r' ");
+    OSAssertMessage_Line(681, q, "QUATLogN():  NULL QuaternionPtr 'q' ");
+    OSAssertMessage_Line(682, r, "QUATLogN():  NULL QuaternionPtr 'r' ");
 
     scale = (q->x * q->x) + (q->y * q->y) + (q->z * q->z);
 
-#ifdef DEBUG
+#ifndef NDEBUG
     mag = scale + (q->z * q->z);
-    if (mag < 1.0f - 0.00001f || mag > 1.0f + 0.00001f || mag > 1.00001f) {}
+    if (mag < 1.0f - 0.00001f || mag > (1.0f + 0.00001f)) {}
 #endif
 
     scale = sqrtf(scale);

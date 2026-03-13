@@ -17,7 +17,7 @@ MtxPtr MTXPush(MTXStack* sPtr, const Mtx m) {
     OSAssertMessage_Line(111, sPtr->stackBase, "MTXPush():  'sPtr' contains a NULL ptr to stack memory ");
     OSAssertMessage_Line(112, m, "MTXPush():  NULL MtxPtr 'm' ");
 
-    if (sPtr->stackPtr == nullptr) {
+    if (sPtr->stackPtr == NULL) {
         sPtr->stackPtr = sPtr->stackBase;
         MTXCopy(m, sPtr->stackPtr);
     } else {
