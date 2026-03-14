@@ -38,6 +38,8 @@
 #define OSAssert_Line(line_, exp_)	\
 	OSAssertMessage_FileLine(__FILE__, line_, exp_, "Failed assertion " #exp_)
 
+#define ASSERT(exp_) ((void)0)
+
 // OSError
 #define OSError_FileLine(file_, line_, ...)	\
 	OSPanic(file_, line_, __VA_ARGS__)

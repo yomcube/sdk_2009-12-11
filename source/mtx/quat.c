@@ -310,8 +310,7 @@ void C_QUATLogN(const Quaternion* q, Quaternion* r) {
     if (true) { // fake match?
         f32 mag = scale + (q->z * q->z);
         if (mag < 1.0f - 0.00001f || mag > 1.0f + 0.00001f) {
-            // Some stripped function call?
-            (void)0;
+            ASSERT("QUATLogN():  'q' is not a unit quaternion. ");
         }
     }
 #endif
